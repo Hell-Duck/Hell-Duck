@@ -1,3 +1,4 @@
+//Задача 1:
 cut -d: -f1 passwd.txt | sort
 Пример вывода:
 ![image](https://github.com/user-attachments/assets/fab17614-56bc-45fc-8e16-017e7878b2d5)
