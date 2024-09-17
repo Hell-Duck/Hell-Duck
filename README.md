@@ -1,4 +1,4 @@
-Задача 1: 
+![image](https://github.com/user-attachments/assets/056b07fb-722c-4104-b369-ebb35ab8edf4)Задача 1: 
 
 ![image](https://github.com/user-attachments/assets/9451b1b7-2bfd-4808-98a3-8273de54cd07)
 
@@ -161,4 +161,120 @@ int main() {
 Вывод:
 
 ![image](https://github.com/user-attachments/assets/e760ddfb-064b-4023-9e30-4a7457733250)
+
+Задача 7:
+
+![image](https://github.com/user-attachments/assets/c5654626-61b1-491d-81bf-137de31a2ac9)
+
+Листинг: 
+
+```C++
+#include <iostream>
+#include <filesystem>
+#include <unordered_map>
+#include <vector>
+#include <fstream>
+using namespace std;
+namespace fs = filesystem;
+
+string compute_hash(const fs::path& filePath) {
+    ifstream file(filePath, ios::binary);
+    string hash(istreambuf_iterator<char>(file), {});
+    return hash;
+}
+
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        cerr << "Использование: " << argv[0] << " <путь>" << endl;
+        return 1;
+    }
+
+    fs::path dirPath(argv[1]);
+    if (!fs::exists(dirPath) || !fs::is_directory(dirPath)) {
+        cerr << "Указанный путь не является директорией." << endl;
+        return 1;
+    }
+    unordered_map<string, vector<fs::path>> fileHashes;
+    for (const auto& entry : fs::recursive_directory_iterator(dirPath)) {
+        if (fs::is_regular_file(entry)) {
+            string fileHash = compute_hash(entry);
+            fileHashes[fileHash].push_back(entry);
+        }
+    }
+    for (const auto& [hash, paths] : fileHashes) {
+        if (paths.size() > 1) {
+            cout << "Найдены дубликаты файлов с хэшем: " << hash << endl;
+            for (const auto& path : paths) {
+                cout << "    " << path << endl;
+            }
+            cout << endl;
+        }
+    }
+
+    return 0;
+}
+
+```
+
+Вывод:
+
+//В файлах in и out перед запуском программы содержимое сделали одинаковым
+
+![image](https://github.com/user-attachments/assets/10f375f9-13e5-47be-aaf2-925dd91a42ed)
+
+Задача 9:
+
+
+![image](https://github.com/user-attachments/assets/62953766-d56a-40cc-97d9-b68e0160dd0e)
+
+Листинг:
+
+```C++
+#include <fstream>
+#include <iostream>
+using namespace std;
+int main() {
+    ifstream in("in.txt");
+    ofstream out("out.txt");
+    string line;
+    string line2;
+    while (getline(in, line))
+    {
+        int count = 0;
+        line2 = "";
+        for (int i = 0; i < size(line); i++) {
+            if (count == 4) {
+                line2 += '\t';
+                count = 0;
+            }
+            if (line[i] == ' ') {
+                count++;
+            }
+            else {
+                if (count == 0)
+                    line2 += line[i];
+                else
+                {
+                    for (int j = 0; j < count; j++)
+                        line2 += ' ';
+                }
+                count = 0;
+            }
+        }
+        out << line2 << "\n";
+    }
+}
+```
+Запуск:
+
+![image](https://github.com/user-attachments/assets/1c320be7-e6b9-4a62-8559-ee3fff0f1630)
+
+in.txt:
+
+![image](https://github.com/user-attachments/assets/f6e878f1-0f69-458e-a801-6fad0a780c31)
+
+out.txt:
+
+![image](https://github.com/user-attachments/assets/f5c46d8e-c32b-411c-b610-e7c2ff565207)
+
 
