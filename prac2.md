@@ -40,3 +40,6 @@ Required-by: Список пакетов, которые зависят от mat
 ![image](https://github.com/user-attachments/assets/775ce48d-2319-4157-aadb-a7695dfe8cc4)
 matplotlib:
 ![image](https://github.com/user-attachments/assets/dff1d6ee-af31-4c7a-ac5d-f341b1cfa275)
+express:
+![image](https://github.com/user-attachments/assets/5d069fae-e8d6-4b65-91fd-15d415d46529)
+
