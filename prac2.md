@@ -27,3 +27,16 @@ Requires: Список зависимых пакетов, необходимых
 Required-by: Список пакетов, которые зависят от matplotlib.
 
 Чтобы получить пакет без менеджера пакетов, прямо из репозитория нужно перейти по ссылке: https://matplotlib.org
+
+
+
+
+![image](https://github.com/user-attachments/assets/b1061b22-8d0c-428c-8bb1-d1fdf2b4bb1a)
+
+![image](https://github.com/user-attachments/assets/055cea4b-127d-4e35-a900-5ffc04a2ee96)
+Чтобы получить пакет без менеджера пакетов, прямо из репозитория нужно перейти по ссылке: http://expressjs.com/
+
+
+![image](https://github.com/user-attachments/assets/775ce48d-2319-4157-aadb-a7695dfe8cc4)
+matplotlib:
+![image](https://github.com/user-attachments/assets/dff1d6ee-af31-4c7a-ac5d-f341b1cfa275)
