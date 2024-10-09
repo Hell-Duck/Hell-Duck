@@ -206,41 +206,4 @@ icons = 100;
 
 
 
-![image](https://github.com/user-attachments/assets/2cdf3ec2-7361-495c-a541-fd6fdab9d553)
 
-Листинг: 
-```
-include "globals.mzn";
-
-enum Packages = {root, foo_1_0_0, foo_1_1_0, left_1_0_0, right_1_0_0, shared_1_0_0, shared_2_0_0, target_1_0_0, target_2_0_0};
-array[Packages] of var 0..1: installed;
-constraint installed[root] == 1; 
-constraint forall(p in Packages) (
-  if p == root then
-    (installed[root] == 1) <-> ((installed[foo_1_0_0] == 1) /\ (installed[target_1_0_0] == 1))
-  elseif p == foo_1_1_0 then
-    (installed[foo_1_1_0] == 1) <-> ((installed[left_1_0_0] == 1) /\ (installed[right_1_0_0] == 1))
-  elseif p == foo_1_0_0 then
-    true
-  elseif p == left_1_0_0 then
-    (installed[left_1_0_0] == 1) <-> (installed[shared_1_0_0] == 1)
-  elseif p == right_1_0_0 then
-    (installed[right_1_0_0] == 1) <-> ((installed[shared_1_0_0] == 1) /\ (shared_1_0_0 < 200))
-  elseif p == shared_1_0_0 then
-    (installed[shared_1_0_0] == 1) <-> (installed[target_1_0_0] == 1)
-  elseif p == shared_2_0_0 then
-    true
-  elseif p == target_1_0_0 then
-    true
-
-  else
-    true
-  endif
-);
-solve satisfy;
-output ["installed: " ++ show(installed)];
-
-```
-Вывод:
-
-![image](https://github.com/user-attachments/assets/25780ae6-2dc7-4ebb-9dd9-1ac6febafb47)
