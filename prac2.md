@@ -41,6 +41,7 @@ Required-by: Список пакетов, которые зависят от mat
 matplotlib:
 ![image](https://github.com/user-attachments/assets/dff1d6ee-af31-4c7a-ac5d-f341b1cfa275)
 express:
+
 ![image](https://github.com/user-attachments/assets/5d069fae-e8d6-4b65-91fd-15d415d46529)
 
 
@@ -51,133 +52,19 @@ express:
 ```MiniZinc
 include "globals.mzn";
 
-var 0..9: d1;  
-var 0..9: d2; 
-var 0..9: d3;  
-var 0..9: d4; 
-var 0..9: d5;  
-var 0..9: d6; 
+array[1..6] of var 0..9: digits;
+constraint all_different(digits);
 
-constraint all_different([d1, d2, d3, d4, d5, d6]);
+var int: sum_first = sum(digits[1..3]);
+var int: sum_last = sum(digits[4..6]);
 
-constraint d1 + d2 + d3 = d4 + d5 + d6;  
-
-solve minimize d1 * 100000 + d2 * 10000 + d3 * 1000 + d4 * 100 + d5 * 10 + d6;
+constraint sum_first = sum_last;
+solve minimize sum_first;
 ```
 Вывод:
 
-d1 = 4;
-d2 = 3;
-d3 = 2;
-d4 = 8;
-d5 = 1;
-d6 = 0;
-----------
-d1 = 3;
-d2 = 4;
-d3 = 2;
-d4 = 8;
-d5 = 1;
-d6 = 0;
-----------
-d1 = 2;
-d2 = 4;
-d3 = 3;
-d4 = 8;
-d5 = 1;
-d6 = 0;
-----------
-d1 = 2;
-d2 = 3;
-d3 = 4;
-d4 = 8;
-d5 = 1;
-d6 = 0;
-----------
-d1 = 1;
-d2 = 4;
-d3 = 3;
-d4 = 6;
-d5 = 2;
-d6 = 0;
-----------
-d1 = 1;
-d2 = 3;
-d3 = 4;
-d4 = 6;
-d5 = 2;
-d6 = 0;
-----------
-d1 = 1;
-d2 = 2;
-d3 = 6;
-d4 = 5;
-d5 = 4;
-d6 = 0;
-----------
-d1 = 1;
-d2 = 2;
-d3 = 6;
-d4 = 4;
-d5 = 5;
-d6 = 0;
-----------
-d1 = 0;
-d2 = 5;
-d3 = 4;
-d4 = 6;
-d5 = 2;
-d6 = 1;
-----------
-d1 = 0;
-d2 = 4;
-d3 = 5;
-d4 = 6;
-d5 = 2;
-d6 = 1;
-----------
-d1 = 0;
-d2 = 2;
-d3 = 6;
-d4 = 4;
-d5 = 3;
-d6 = 1;
-----------
-d1 = 0;
-d2 = 2;
-d3 = 6;
-d4 = 3;
-d5 = 4;
-d6 = 1;
-----------
-d1 = 0;
-d2 = 1;
-d3 = 8;
-d4 = 4;
-d5 = 3;
-d6 = 2;
-----------
-d1 = 0;
-d2 = 1;
-d3 = 8;
-d4 = 3;
-d5 = 4;
-d6 = 2;
-----------
-d1 = 0;
-d2 = 1;
-d3 = 8;
-d4 = 2;
-d5 = 4;
-d6 = 3;
-----------
-d1 = 0;
-d2 = 1;
-d3 = 8;
-d4 = 2;
-d5 = 3;
-d6 = 4;
-----------
+![image](https://github.com/user-attachments/assets/5dc67351-ca32-4692-ba49-a028be148120)
+
 
 
 ![image](https://github.com/user-attachments/assets/705ffa7e-89cb-485e-89be-3dcf5e3b2891)
