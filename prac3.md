@@ -29,29 +29,81 @@ local students = [
 ![image](https://github.com/user-attachments/assets/2aaf3b9c-a56e-4a86-9de2-13a86be0c9d6)
 
 ```dash
-let Prelude =
-      https://prelude.dhall-lang.org/v19.0.0/package.dhall sha256:eb693342eb769f782174157eba9b5924cf8ac6793897fc36a31ccbd6f56dafe2
 let Student = { age : Natural, group : Text, name : Text }
 
-let mkStudent : Text -> Natural -> Text -> Student =
-λ(name : Text) → λ(age : Natural) → λ(group : Text) →
-{ age = age, group = group, name = name }
+let Group = Text
 
-let groups : List Text =
 let groupPrefix = "ИКБО-"
-let groupSuffix = "-20"
-let groupNumbers = List.range 1 25 
-in List.map (λ(i : Natural) → groupPrefix ++ Text.show i ++ groupSuffix) groupNumbers
 
-let students : List Student =
-[ mkStudent "Иванов И.И." 19 "ИКБО-4-20"
-, mkStudent "Петров П.П." 18 "ИКБО-5-20"
-, mkStudent "Сидоров С.С." 18 "ИКБО-5-20"
-, mkStudent "Юдин А.А." 20 "ИКБО-6-20" 
-]
+let groupYear = "-20"
 
-in { groups = generateGroups, students = students, subject = "Конфигурационное управление" }
+let makeGroup =
+      λ(n : Natural) →
+        groupPrefix ++ Natural/show n ++ groupYear
+
+let groups =
+      [ makeGroup 1, makeGroup 2, makeGroup 3, makeGroup 4, makeGroup 5
+      , makeGroup 6, makeGroup 7, makeGroup 8, makeGroup 9, makeGroup 10
+      , makeGroup 11, makeGroup 12, makeGroup 13, makeGroup 14, makeGroup 15
+      , makeGroup 16, makeGroup 17, makeGroup 18, makeGroup 19, makeGroup 20
+      , makeGroup 21, makeGroup 22, makeGroup 23, makeGroup 24
+      ]
+
+let students =
+      [ { age = 19, group = makeGroup 4, name = "Иванов И.И." }
+      , { age = 18, group = makeGroup 5, name = "Петров П.П." }
+      , { age = 18, group = makeGroup 5, name = "Сидоров С.С." }
+      , { age = 20, group = makeGroup 6, name = "Юдин А.А." }
+      ]
+
+let subject = "Конфигурационное управление"
+
+in  { groups = groups, students = students, subject = subject }
 ```
+
+Вывод:
+groups:
+  - "ИКБО-1-20"
+  - "ИКБО-2-20"
+  - "ИКБО-3-20"
+  - "ИКБО-4-20"
+  - "ИКБО-5-20"
+  - "ИКБО-6-20"
+  - "ИКБО-7-20"
+  - "ИКБО-8-20"
+  - "ИКБО-9-20"
+  - "ИКБО-10-20"
+  - "ИКБО-11-20"
+  - "ИКБО-12-20"
+  - "ИКБО-13-20"
+  - "ИКБО-14-20"
+  - "ИКБО-15-20"
+  - "ИКБО-16-20"
+  - "ИКБО-17-20"
+  - "ИКБО-18-20"
+  - "ИКБО-19-20"
+  - "ИКБО-20-20"
+  - "ИКБО-21-20"
+  - "ИКБО-22-20"
+  - "ИКБО-23-20"
+  - "ИКБО-24-20"
+
+students:
+  - age: 19
+    group: "ИКБО-4-20"
+    name: "Иванов И.И."
+  - age: 18
+    group: "ИКБО-5-20"
+    name: "Петров П.П."
+  - age: 18
+    group: "ИКБО-5-20"
+    name: "Сидоров С.С."
+  - age: 20
+    group: "ИКБО-6-20"
+    name: "Юдин А.А."
+
+subject: "Конфигурационное управление"
+
 
 ![image](https://github.com/user-attachments/assets/cc6623f1-dff7-4698-a218-56df6f96d5cc)
 
